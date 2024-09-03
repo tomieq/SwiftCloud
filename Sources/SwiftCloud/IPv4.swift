@@ -1,5 +1,5 @@
 //
-//  IP.swift
+//  IPv4.swift
 //  SwiftCloud
 //
 //  Created by Tomasz on 03/09/2024.
@@ -9,7 +9,7 @@ public enum IPError: Error {
     case invalidFormat
 }
 
-public struct IP {
+public struct IPv4 {
     let readable: String
     let raw: UInt32
 
@@ -37,13 +37,13 @@ public struct IP {
     }
 }
 
-extension IP: Comparable {
-    public static func < (lhs: IP, rhs: IP) -> Bool {
+extension IPv4: Comparable {
+    public static func < (lhs: IPv4, rhs: IPv4) -> Bool {
         lhs.raw < rhs.raw
     }
 }
 
-extension IP: CustomStringConvertible {
+extension IPv4: CustomStringConvertible {
     public var description: String {
         readable
     }
