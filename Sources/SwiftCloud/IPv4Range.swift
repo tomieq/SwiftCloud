@@ -65,4 +65,15 @@ public struct IPv4Range {
         self.start = IPv4(baseIP.raw & self.mask.raw)
         self.end = IPv4(baseIP.raw | ~self.mask.raw)
     }
+    
+    public func contains(_ ip: IPv4) -> Bool {
+        ip >= start && ip <= end
+    }
+    
+    public func contains(_ ip: String) -> Bool {
+        guard let ip = try? IPv4(ip) else {
+            return false
+        }
+        return ip >= start && ip <= end
+    }
 }

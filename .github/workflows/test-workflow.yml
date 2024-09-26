@@ -1,8 +1,8 @@
 name: testing-workflow
-run-name: Unit tests with Swift 6 started by${{ github.actor }}
+run-name: Unit tests with Swift 6 started by ${{ github.actor }}
 on: [push]
 jobs:
-  testing-job:
+  unit-tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

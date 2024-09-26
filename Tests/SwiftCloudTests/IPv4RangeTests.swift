@@ -56,4 +56,13 @@ struct IPv4RangeTests {
         range = try IPv4Range(start: "192.168.1.1", end: "192.168.1.255")
         #expect(range.count == 255)
     }
+    
+    @Test("Verify contains")
+    func verifyContains() async throws {
+        let range = try IPv4Range(start: "10.4.12.10", end: "10.4.12.50")
+        #expect(range.contains("10.4.12.10"))
+        #expect(range.contains("10.4.12.12"))
+        #expect(range.contains("10.4.12.50"))
+        #expect(!range.contains("10.4.12.51"))
+    }
 }
