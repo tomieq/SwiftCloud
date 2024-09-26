@@ -25,7 +25,7 @@ public struct IPv4Range {
         "\(start.readable) - \(end.readable)"
     }
 
-    init(start: IPv4, end: IPv4) throws {
+    public init(start: IPv4, end: IPv4) throws {
         self.start = start
         self.end = end
         let diff = self.start.raw ^ self.end.raw
@@ -33,11 +33,11 @@ public struct IPv4Range {
         self.mask = IPv4(UInt32.max << (32 - maskLength))
     }
 
-    init(start: String, end: String) throws {
+    public init(start: String, end: String) throws {
         try self.init(start: try IPv4(start), end: try IPv4(end))
     }
 
-    init(ip: String, mask: String) throws {
+    public init(ip: String, mask: String) throws {
         let baseIP = try IPv4(ip)
         self.mask = try IPv4(mask)
         self.start = IPv4(baseIP.raw & self.mask.raw)
@@ -45,7 +45,7 @@ public struct IPv4Range {
     }
 
     // e.g. 10.241.46.0/23
-    init(cidr: String) throws {
+    public init(cidr: String) throws {
         let components = cidr.split("/")
         guard components.count == 2,
               let ip = components.first,
