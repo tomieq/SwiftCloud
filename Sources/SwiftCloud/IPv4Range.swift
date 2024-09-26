@@ -24,6 +24,10 @@ public struct IPv4Range {
     public var readable: String {
         "\(start.readable) - \(end.readable)"
     }
+    
+    public var count: Int {
+        1 + Int(end.raw - start.raw)
+    }
 
     public init(start: IPv4, end: IPv4) throws {
         self.start = start

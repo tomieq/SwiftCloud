@@ -39,4 +39,14 @@ struct IPv4RangeTests {
         #expect(range.mask.readable == "255.255.255.192")
         #expect(range.cidr == "10.241.48.64/26")
     }
+
+    @Test("Verify count")
+    func verifyCount() async throws {
+        var range = try IPv4Range(start: "10.4.12.10", end: "10.4.12.10")
+        #expect(range.count == 1)
+        range = try IPv4Range(start: "10.4.12.1", end: "10.4.12.2")
+        #expect(range.count == 2)
+        range = try IPv4Range(start: "192.168.1.1", end: "192.168.1.255")
+        #expect(range.count == 255)
+    }
 }
