@@ -39,6 +39,13 @@ struct IPv4RangeTests {
         #expect(range.mask.readable == "255.255.255.192")
         #expect(range.cidr == "10.241.48.64/26")
     }
+    
+    @Test("Invalid init values")
+    func verifyNegativeInitValues() async throws {
+        #expect(throws: IpRangeError.emptyRange, performing: {
+            try IPv4Range(start: "10.4.12.10", end: "10.4.10.10")
+        })
+    }
 
     @Test("Verify count")
     func verifyCount() async throws {

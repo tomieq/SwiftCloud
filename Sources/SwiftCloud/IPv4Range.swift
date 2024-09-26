@@ -7,6 +7,7 @@
 
 public enum IpRangeError: Error {
     case invalidSyntax
+    case emptyRange
 }
 
 public struct IPv4Range {
@@ -32,6 +33,9 @@ public struct IPv4Range {
     public init(start: IPv4, end: IPv4) throws {
         self.start = start
         self.end = end
+        guard end.raw >= start.raw else {
+            throw IpRangeError.emptyRange
+        }
         let diff = self.start.raw ^ self.end.raw
         let maskLength = 32 - diff.bitWidth + diff.leadingZeroBitCount
         self.mask = IPv4(UInt32.max << (32 - maskLength))
