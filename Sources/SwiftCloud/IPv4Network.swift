@@ -14,7 +14,7 @@ public struct IPv4Network {
     public let broadcastIP: IPv4
     public let range: IPv4Range
     
-    init(range: IPv4Range) throws {
+    public init(range: IPv4Range) throws {
         guard range.count > 2 else {
             throw IPv4NetworkError.rangeTooShort
         }

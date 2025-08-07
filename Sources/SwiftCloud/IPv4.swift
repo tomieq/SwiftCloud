@@ -13,7 +13,7 @@ public struct IPv4 {
     let readable: String
     let raw: UInt32
 
-    init(_ text: String) throws {
+    public init(_ text: String) throws {
         let parts = text.split(".").compactMap { UInt8($0) }
         guard parts.count == 4 else {
             throw IPError.invalidFormat
@@ -27,7 +27,7 @@ public struct IPv4 {
         self.raw = ipAddress
     }
 
-    init(_ raw: UInt32) {
+    public init(_ raw: UInt32) {
         let byte1 = (raw >> 24) & 0xFF
         let byte2 = (raw >> 16) & 0xFF
         let byte3 = (raw >> 8) & 0xFF
