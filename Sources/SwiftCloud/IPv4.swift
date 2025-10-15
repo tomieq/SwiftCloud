@@ -35,6 +35,13 @@ public struct IPv4 {
         self.readable = "\(byte1).\(byte2).\(byte3).\(byte4)"
         self.raw = raw
     }
+    
+    public var next: IPv4? {
+        guard raw < .max else {
+            return nil
+        }
+        return IPv4(raw + 1)
+    }
 }
 
 extension IPv4: Comparable {

@@ -65,4 +65,23 @@ struct IPv4RangeTests {
         #expect(range.contains("10.4.12.50"))
         #expect(!range.contains("10.4.12.51"))
     }
+    
+    @Test("Verify sequence")
+    func verifySequence() async throws {
+        let range = try IPv4Range(start: "10.4.12.10", end: "10.4.12.14")
+        let expected = [
+            try IPv4("10.4.12.10"),
+            try IPv4("10.4.12.11"),
+            try IPv4("10.4.12.12"),
+            try IPv4("10.4.12.13"),
+            try IPv4("10.4.12.14")
+        ]
+        
+        var sequence: [IPv4] = []
+        for num in range {
+            sequence.append(num)
+        }
+        
+        #expect(sequence == expected)
+    }
 }
