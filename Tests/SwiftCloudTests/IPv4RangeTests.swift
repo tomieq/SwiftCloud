@@ -30,7 +30,7 @@ struct IPv4RangeTests {
     
     @Test("Verify initializer from mask String")
     func verifyInitFromMask() throws {
-        var range = try IPv4Range(ip: "10.4.12.0", mask: "255.255.252.0")
+        var range = IPv4Range(ip: "10.4.12.0", mask: "255.255.252.0")
         #expect(range.start.readable == "10.4.12.0")
         #expect(range.end.readable == "10.4.15.255")
         #expect(range.mask.readable == "255.255.252.0")
@@ -70,11 +70,11 @@ struct IPv4RangeTests {
     func verifySequence() async throws {
         let range = try IPv4Range(start: "10.4.12.10", end: "10.4.12.14")
         let expected = [
-            try IPv4("10.4.12.10"),
-            try IPv4("10.4.12.11"),
-            try IPv4("10.4.12.12"),
-            try IPv4("10.4.12.13"),
-            try IPv4("10.4.12.14")
+            IPv4("10.4.12.10"),
+            IPv4("10.4.12.11"),
+            IPv4("10.4.12.12"),
+            IPv4("10.4.12.13"),
+            IPv4("10.4.12.14")
         ]
         
         var sequence: [IPv4] = []

@@ -41,13 +41,9 @@ public struct IPv4Range {
         self.mask = IPv4(UInt32.max << (32 - maskLength))
     }
 
-    public init(start: String, end: String) throws {
-        try self.init(start: try IPv4(start), end: try IPv4(end))
-    }
-
-    public init(ip: String, mask: String) throws {
-        let baseIP = try IPv4(ip)
-        self.mask = try IPv4(mask)
+    public init(ip: IPv4, mask: IPv4) {
+        let baseIP = ip
+        self.mask = mask
         self.start = IPv4(baseIP.raw & self.mask.raw)
         self.end = IPv4(baseIP.raw | ~self.mask.raw)
     }
@@ -60,7 +56,7 @@ public struct IPv4Range {
               let prefixLength = Int(components.last ?? "") else {
             throw IpRangeError.invalidSyntax
         }
-        let baseIP = try IPv4(ip)
+        let baseIP = IPv4(ip)
         self.mask = IPv4(UInt32.max << (32 - prefixLength))
         self.start = IPv4(baseIP.raw & self.mask.raw)
         self.end = IPv4(baseIP.raw | ~self.mask.raw)
@@ -68,12 +64,5 @@ public struct IPv4Range {
     
     public func contains(_ ip: IPv4) -> Bool {
         ip >= start && ip <= end
-    }
-    
-    public func contains(_ ip: String) -> Bool {
-        guard let ip = try? IPv4(ip) else {
-            return false
-        }
-        return ip >= start && ip <= end
     }
 }

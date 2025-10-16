@@ -5,18 +5,16 @@
 //  Created by Tomasz on 03/09/2024.
 //
 
-public enum IPError: Error {
-    case invalidFormat
-}
-
 public struct IPv4 {
     let readable: String
     let raw: UInt32
 
-    public init(_ text: String) throws {
+    public init(_ text: String) {
         let parts = text.split(".").compactMap { UInt8($0) }
         guard parts.count == 4 else {
-            throw IPError.invalidFormat
+            print("IPv4 init error: `\(text)` is not a valid IPv4 address, fallback to default 0.0.0.0")
+            self = .init(0)
+            return
         }
         var ipAddress: UInt32 = 0
         for component in parts {
